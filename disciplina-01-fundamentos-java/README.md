@@ -1,25 +1,19 @@
-# Disciplina 01 — Fundamentos do Java
+# Desafio 1: Consistência de Dados com Encapsulamento
 
-Nesta disciplina são trabalhados os principais fundamentos da linguagem Java e os conceitos essenciais para desenvolvimento de aplicações.
+Este desafio foca em um dos pilares mais importantes da Programação Orientada a Objetos (POO): **Encapsulamento**.
 
-## Conteúdos
+## Objetivo do Desafio
 
-- História e evolução do Java
-- Estruturas de dados
-- Orientação a Objetos
-- Collections
-- Streams e Lambda Expressions
-- Manipulação de arquivos com NIO
-- Tratamento de erros e exceções
-- APIs principais do Java
-- Concorrência
-- Maven
-- Gradle
-- Configuração do ambiente de desenvolvimento
+O código inicial fornecido no arquivo `Produto.java` demonstra uma falha na forma como os dados de um item são geridos.
 
-## Estrutura
+Atualmente, é possível criar e manipular produtos com informações inconsistentes, como preços negativos ou estoque insuficiente (também negativo ou nulo), ou até mesmo um nome de produto inválido.
 
-- `exemplos/` — códigos demonstrados durante as aulas
-- `desafios/` — exercícios e desafios práticos
-- `projetos/` — projetos completos da disciplina
-- `extras/` — conteúdos complementares
+Sua tarefa é **corrigir a classe `Produto`** para garantir que os dados sejam sempre válidos e consistentes, aplicando os conceitos de encapsulamento e validação.
+
+## O Problema (Código Atual)
+
+Execute o arquivo `Main.java`.
+
+Você verá que o programa cria objetos `Produto` e até modifica seus atributos diretamente, permitindo valores que não fazem sentido no mundo real (ex: preço -2.00, estoque -5).
+
+Isso é uma falha grave na integridade dos dados!
