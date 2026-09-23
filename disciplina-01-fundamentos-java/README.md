@@ -32,6 +32,9 @@ Exercício prático focado em **Programação Orientada a Objetos**, encapsulame
 
 ## Projeto da Disciplina
 
+## Link do Trello:
+https://trello.com/b/KmZHipzR/projeto-pratico-unipds-fundamentos-java
+
 ### Zenón Bank
 
 Projeto prático utilizado para consolidar os principais conceitos estudados em Fundamentos do Java.
