@@ -1,19 +1,51 @@
-# Desafio 1: Consistência de Dados com Encapsulamento
+# Disciplina 01 — Fundamentos do Java
 
-Este desafio foca em um dos pilares mais importantes da Programação Orientada a Objetos (POO): **Encapsulamento**.
+Nesta disciplina são trabalhados os principais fundamentos da linguagem Java, com foco em orientação a objetos, estruturas de dados, APIs da linguagem e boas práticas de desenvolvimento.
 
-## Objetivo do Desafio
+## Conteúdos da disciplina
 
-O código inicial fornecido no arquivo `Produto.java` demonstra uma falha na forma como os dados de um item são geridos.
+- História e evolução do Java
+- Estruturas de dados
+- List, Map e Set
+- Orientação a Objetos
+- Herança, Polimorfismo, Abstração e Encapsulamento
+- Streams e Lambda Expressions
+- Manipulação de arquivos com NIO
+- Tratamento de erros e exceções
+- Principais APIs do Java
+- Concorrência
+- Maven
+- Gradle
+- Configuração do ambiente de desenvolvimento
 
-Atualmente, é possível criar e manipular produtos com informações inconsistentes, como preços negativos ou estoque insuficiente (também negativo ou nulo), ou até mesmo um nome de produto inválido.
+---
 
-Sua tarefa é **corrigir a classe `Produto`** para garantir que os dados sejam sempre válidos e consistentes, aplicando os conceitos de encapsulamento e validação.
+## Desafios
 
-## O Problema (Código Atual)
+### Desafio 01 — Consistência de Dados com Encapsulamento
 
-Execute o arquivo `Main.java`.
+Exercício prático focado em **Programação Orientada a Objetos**, encapsulamento, validação e consistência de dados.
 
-Você verá que o programa cria objetos `Produto` e até modifica seus atributos diretamente, permitindo valores que não fazem sentido no mundo real (ex: preço -2.00, estoque -5).
+➡️ [Acessar o Desafio 01](./desafios/desafio-01-encapsulamento)
 
-Isso é uma falha grave na integridade dos dados!
+---
+
+## Projeto da Disciplina
+
+### Zenón Bank
+
+Projeto prático utilizado para consolidar os principais conceitos estudados em Fundamentos do Java.
+
+➡️ [Acessar o projeto Zenón Bank](./projetos/zenon-bank)
+
+---
+
+## Estrutura
+
+```text
+disciplina-01-fundamentos-java/
+├── desafios/
+│   └── desafio-01-encapsulamento/
+├── projetos/
+│   └── zenon-bank/
+└── README.md
