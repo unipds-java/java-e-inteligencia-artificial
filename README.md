@@ -106,3 +106,11 @@ disciplina-XX/
 ├── exemplos/
 ├── desafios/
 └── projetos/
+
+---
+
+## 🎥 Lives
+
+Além dos conteúdos das disciplinas, este repositório centraliza os materiais utilizados nas lives da formação.
+
+➡️ [Acessar materiais das Lives](./lives)
