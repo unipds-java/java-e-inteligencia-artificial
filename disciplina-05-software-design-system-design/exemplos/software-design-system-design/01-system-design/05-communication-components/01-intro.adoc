@@ -1,0 +1,49 @@
+= 🔗 Communication Between Components – Sample Flow
+Otávio Santana
+:toc: left
+:icons: font
+:sectnums:
+:kroki-server-url: https://kroki.io
+
+== 📡 Example: Communication Flow Using REST and gRPC
+
+[source, mermaid]
+----
+sequenceDiagram
+    participant 🟦 App A
+    participant 🟧 App B
+    participant 🗄️ DB B
+    participant 🗃️ DB A
+
+    🟦 App A->>🟧 App B: Communicate with third-party service
+    🟧 App B->>🗄️ DB B: SELECT user info
+    🗄️ DB B-->>🟧 App B: user data
+    🟧 App B-->>🟦 App A: user data
+    🟦 App A->>🗃️ DB A: INSERT user data
+----
+
+This diagram illustrates a typical hybrid architecture:
+
+* REST at the edge (Client ↔ API Gateway ↔ User Service)
+* gRPC for internal service-to-service calls (Auth)
+* Direct DB access by internal services
+
+[source, mermaid]
+----
+architecture-beta
+    group api(cloud)[Company]
+    group api2(cloud)[Third Party]
+
+    service db(database)[Database A] in api
+    service db2(database)[Database B] in api2
+    service disk1(disk)[Storage A] in api
+    service disk2(disk)[Storage B] in api2
+    service server(server)[Server] in api
+    service server2(server)[Server] in api2
+
+    db:L -- R:server
+    disk1:T -- B:db
+    db2:L -- R:server2
+    disk2:T -- B:db2
+    server:L -- R:server2
+----

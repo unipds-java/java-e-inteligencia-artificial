@@ -1,0 +1,121 @@
+= 💳 REST Payment Integration – Practical Example
+Otávio Santana
+:toc: left
+:icons: font
+:sectnums:
+:kroki-server-url: https://kroki.io
+
+==  C4Context – REST Payment Integration
+
+[source, mermaid]
+----
+C4Context
+    title System Context – REST Payment Integration
+
+    Enterprise_Boundary(company, "Company System") {
+        Person(customer, "🧑 Customer", "Uses the system to place orders and make payments")
+
+        System(system, "🟦 Backend System", "Processes orders and initiates payment requests")
+
+        System_Boundary(internal, "Internal Subsystems") {
+            System(orderService, "📦 Order Service", "Handles order creation and state transitions")
+            SystemDb(orderDb, "🗃️ Order Database", "Stores order and payment info")
+        }
+    }
+
+    System_Ext(paymentProvider, "💳 Payment Provider", "Processes payments via external REST API")
+
+    Rel(customer, system, "Places order and triggers checkout")
+    Rel(system, orderService, "Sends order and payment status")
+    Rel(orderService, orderDb, "Reads/Writes order info")
+    Rel(system, paymentProvider, "Sends payment request", "HTTPS/REST")
+    Rel(paymentProvider, system, "Sends payment confirmation (webhook)", "HTTPS")
+
+    UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="1")
+----
+
+==  C4Container – REST Payment Integration
+
+[source, mermaid]
+----
+C4Container
+title Container Diagram – REST Payment Integration
+
+Person(customer, "🧑 Customer", "End user placing orders via web or mobile")
+
+System_Ext(payment_provider, "💳 Payment Provider", "External system for processing payments (e.g., Stripe)")
+
+Container_Boundary(app, "Company Backend System") {
+    Container(client_app, "Client App", "React / Web", "Allows customers to place orders and initiate payments")
+    Container(backend, "Java Backend", "Java + Spring Boot", "Handles checkout and payment logic")
+    Container(order_service, "Order Service", "Spring Boot", "Manages order state and processing")
+    ContainerDb(database, "Order Database", "PostgreSQL", "Stores order and payment info")
+}
+
+Rel(customer, client_app, "Uses", "HTTPS")
+Rel(client_app, backend, "Sends order/payment", "HTTPS/REST")
+Rel(backend, payment_provider, "Sends payment request", "HTTPS/REST")
+Rel_Back(payment_provider, backend, "Sends webhook confirmation", "HTTPS")
+
+Rel(backend, order_service, "Marks order as paid", "HTTP/JSON")
+Rel(order_service, database, "Reads/Writes", "JDBC/SQL")
+
+UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
+----
+
+== Sequence Diagram: REST-Based Payment (with Eventual HTTP Request)
+
+[source, mermaid]
+----
+sequenceDiagram
+    participant 🧑 Client
+    participant 🟦 Backend System
+    participant 💳 Payment Provider
+    participant 📦 Order Service
+    participant 🗃️ Database
+
+    🧑 Client->>🟦 Backend System: Checkout Request
+    🟦 Backend System->>💳 Payment Provider: POST /payments
+    💳 Payment Provider-->>🟦 Backend System: Payment Confirmation (Immediate)
+    🟦 Backend System->>📦 Order Service: Mark order as paid
+    📦 Order Service->>🗃️ Database: Update order status
+    note over 💳 Payment Provider,🟦 Backend System: Later...\nEventual HTTP webhook with status
+    💳 Payment Provider-->>🟦 Backend System: POST /payment/webhook
+----
+
+🧭 *Important*:
+This is not truly asynchronous — the webhook is an **eventual HTTP call** made later by the provider.
+It's handled in Java using `@PostMapping` + `@RequestBody` in a Spring `@RestController`.
+
+
+[source, mermaid]
+----
+flowchart TD
+    Client((("🧑 Client\n(Web/Mobile App)"))):::sub
+    Backend["🟦 Backend System"]
+    Payment{{"💳 Payment Provider(e.g., Stripe API)"}}
+    Order["📦 Order Service"]
+    DB[("🗃️ PostgreSQL Database")]
+
+
+    Client --> Backend
+    Backend --> Payment
+    Backend --> Order
+    Order --> DB
+    Payment --> Backend
+----
+
+== 🛠️ Java Stack Notes
+
+* REST client: `WebClient` or `RestTemplate`
+* Webhook receiver:
+[source,java]
+----
+@PostMapping("/payment/webhook")
+public ResponseEntity<Void> handle(@RequestBody PaymentStatus payload) {
+    // process status
+    return ResponseEntity.ok().build();
+}
+----
+* JSON handled via Jackson (`@JsonProperty`, etc.)
+* Optional: `Resilience4j` for retries, timeouts, and circuit breakers

@@ -1,0 +1,110 @@
+=  Social Media
+:toc: macro
+:toclevels: 2
+:sectnums:
+:icons: font
+:source-highlighter: rouge
+
+A social media platform like Twitter (now X) enables users to post short messages ("tweets"), follow others, like and comment, and view a real-time feed. It must support high volumes of reads and writes, scale globally, deliver low-latency feeds, and ensure eventual consistency across services like notifications, analytics, and timelines. The design should balance personalization, fan-out strategies, and throughput optimization.
+
+== System Architecture
+
+=== C1 Context Diagram
+
+[source, mermaid]
+----
+C4Context
+title System Context - Social Media Feed
+
+Enterprise_Boundary(b0, "X Platform") {
+  Person(user, "🧑 User", "Person who posts, follows, and views feeds")
+
+  System(feed_system, "📣 Feed Platform", "Handles tweets, timelines, likes, followers, and interactions")
+
+  System_Ext(notification_system, "🔔 Notification System", "Push/email notifications to users")
+  System_Ext(media_service, "🖼️ Media Storage", "Stores uploaded media (images, videos)")
+  System_Ext(auth_service, "🔐 Auth Service", "Authentication and session management")
+  System_Ext(analytics_system, "📊 Analytics Platform", "Tracks user behavior and engagement")
+
+  Rel(user, feed_system, "Posts and reads tweets")
+  Rel(feed_system, auth_service, "Validates sessions")
+  Rel(feed_system, notification_system, "Sends alerts for likes/comments/follows")
+  Rel(feed_system, media_service, "Uploads or retrieves media")
+  Rel(feed_system, analytics_system, "Sends user activity data")
+}
+----
+
+=== C2 Container Diagram
+
+[source, mermaid]
+----
+C4Container
+title Container Diagram - Social Media Feed (X)
+
+System_Ext(notification_system, "🔔 Notification System", "External push/email infrastructure", $tags="v1.0")
+System_Ext(media_service, "🖼️ Media Service", "Stores and serves images/videos", $tags="v1.0")
+System_Ext(auth_service, "🔐 Auth Service", "Authentication and token validation", $tags="v1.0")
+System_Ext(analytics_system, "📊 Analytics Service", "Collects engagement metrics", $tags="v1.0")
+Person(user, "🧑 User", "Person who interacts with the platform via web or mobile", $tags="v1.0")
+
+Container_Boundary(c1, "📣 Feed System") {
+  Container(web_app, "🌐 Web App", "React", "Web interface to browse, post, and interact with tweets")
+  Container(mobile_app, "📱 Mobile App", "Flutter", "Mobile access to feed and user actions")
+  Container(api_gateway, "🛡 API Gateway", "Spring Cloud Gateway", "Entry point for clients and routing")
+  Container(user_service, "🧑‍🤝‍🧑 User Service", "Java, Spring Boot", "Handles profiles, followers, and authentication integration")
+  Container(tweet_service, "🐦 Tweet Service", "Java, Spring Boot", "Manages posting, deleting, and retrieving tweets")
+  Container(feed_service, "📥 Feed Service", "Java, Spring Boot", "Assembles personalized timelines")
+  Container(interaction_service, "❤️ Interaction Service", "Java, Spring Boot", "Handles likes, retweets, and comments")
+  ContainerDb(database, "🗃️ Feed Database", "Cassandra", "Stores tweets, timelines, and interactions")
+  Container(cache, "⚡ Redis Cache", "Redis", "Caches hot feeds and trending posts")
+}
+
+Rel(user, web_app, "Uses", "HTTPS")
+Rel(user, mobile_app, "Uses", "HTTPS")
+Rel(web_app, api_gateway, "Calls", "HTTPS")
+Rel(mobile_app, api_gateway, "Calls", "HTTPS")
+
+Rel(api_gateway, user_service, "Routes auth/profile requests", "REST")
+Rel(api_gateway, tweet_service, "Routes tweet actions", "REST")
+Rel(api_gateway, feed_service, "Routes feed queries", "REST")
+Rel(api_gateway, interaction_service, "Routes likes/comments", "REST")
+
+Rel(tweet_service, database, "Stores tweets", "Async/Batch")
+Rel(feed_service, cache, "Reads hot timelines", "Redis")
+Rel(feed_service, database, "Reads personalized timeline", "Cassandra")
+Rel(interaction_service, database, "Updates likes/comments", "Async")
+Rel(tweet_service, media_service, "Uploads/loads media", "HTTPS")
+Rel(user_service, auth_service, "Validates token", "HTTPS")
+Rel(tweet_service, analytics_system, "Tracks tweet activity", "Async")
+Rel(interaction_service, notification_system, "Triggers notifications", "HTTPS")
+----
+
+=== System Integration Flow
+
+[source, mermaid]
+----
+sequenceDiagram
+    participant 🧑 as User
+    participant 🌐 as Web/Mobile App
+    participant 🛡 as API Gateway
+    participant 🐦 as Tweet Service
+    participant 🧑‍🤝‍🧑 as User Service
+    participant 📥 as Feed Service
+    participant ⚡ as Redis Cache
+    participant 🗃️ as Feed DB
+    participant 🔔 as Notification System
+    participant 📊 as Analytics Service
+
+    🧑->>🌐: Create new tweet
+    🌐->>🛡: POST /tweet
+    🛡->>🐦: Handle tweet creation
+    🐦->>🧑‍🤝‍🧑: Get list of followers
+    🐦->>📥: Push tweet to followers' feed (fan-out)
+    📥->>🗃️: Persist tweet in timelines
+    📥->>⚡: Update hot cache (if trending)
+    🐦->>🔔: Notify followers
+    🐦->>📊: Track tweet event
+    🐦-->>🛡: Tweet created
+    🛡-->>🌐: 201 Created
+    🌐-->>🧑: Tweet posted successfully
+----

@@ -1,0 +1,36 @@
+= Minimal MVC Component Diagram with Mermaid 🧩
+Otávio Santana
+:toc: left
+:icons: font
+:source-highlighter: highlightjs
+:sectnums:
+:kroki-server-url: https://kroki.io
+:diagram-server: kroki
+
+== 🗺️ Overview
+
+This is a simple 🧠 **Model-View-Controller (MVC)** architecture diagram rendered using **Mermaid** with **Kroki integration** in AsciiDoc.
+
+== 📊 Diagram
+
+[source,mermaid]
+....
+graph TD
+    V[👁️ View] --> C[🧭 Controller]
+    C --> M[🗃️ Model]
+    M --> C
+    C --> V
+....
+
+== 🧩 Component Roles
+
+- **👁️ View**: Presents data to the user and handles the UI 🎨.
+- **🧭 Controller**: Acts as a traffic cop 🚦, interpreting input and invoking business logic.
+- **🗃️ Model**: Contains the core data and logic 🧠.
+
+== 💡 Why use Mermaid in AsciiDoc?
+
+- 🔄 **Version-controlled** like code
+- 📘 Integrated into **docs-as-code** workflows
+- ⚡ Rendered via tools like **Kroki**, **GitLab**, or **Antora**
+- ✅ Easily editable and portable
