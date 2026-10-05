@@ -1,0 +1,4 @@
+nome,preco,possui_propagandas,limite_membros,modo_offline,descricao
+Free,0.00,true,1,false,Gratis com propagandas. Ideal para experimentar o Javify.
+Standard,19.90,false,1,false,Sem propagandas para uma pessoa. Qualidade de audio premium.
+Premium,34.90,false,6,true,"Ate 6 membros, modo offline e qualidade maxima. O melhor do Javify."

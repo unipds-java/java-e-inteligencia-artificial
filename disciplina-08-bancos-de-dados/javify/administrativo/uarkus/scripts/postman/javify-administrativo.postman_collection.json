@@ -1,0 +1,874 @@
+{
+  "info": {
+    "name": "Javify Administrativo",
+    "description": "Coleção para testar a API REST do módulo administrativo do Javify. Use a environment 'Javify Local' para apontar para http://localhost:8080.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Planos",
+      "item": [
+        {
+          "name": "Criar plano",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Premium\",\n  \"preco\": 24.90,\n  \"possuiPropagandas\": false,\n  \"limiteMembros\": 1,\n  \"modoOffline\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/planos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "planos"
+              ]
+            },
+            "description": "curl -X POST {{baseUrl}}/api/planos -H 'Content-Type: application/json' -d '{\"nome\":\"Premium\",\"preco\":24.90,\"possuiPropagandas\":false,\"limiteMembros\":1,\"modoOffline\":true}'"
+          },
+          "response": []
+        },
+        {
+          "name": "Listar planos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/planos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "planos"
+              ]
+            },
+            "description": "curl -X GET {{baseUrl}}/api/planos"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar plano",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/planos/{{planoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "planos",
+                "{{planoId}}"
+              ]
+            },
+            "description": "curl -X GET {{baseUrl}}/api/planos/{{planoId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar plano",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Premium Plus\",\n  \"preco\": 29.90,\n  \"possuiPropagandas\": false,\n  \"limiteMembros\": 2,\n  \"modoOffline\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/planos/{{planoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "planos",
+                "{{planoId}}"
+              ]
+            },
+            "description": "curl -X PUT {{baseUrl}}/api/planos/{{planoId}} -H 'Content-Type: application/json' -d '{\"nome\":\"Premium Plus\",\"preco\":29.90,\"possuiPropagandas\":false,\"limiteMembros\":2,\"modoOffline\":true}'"
+          },
+          "response": []
+        },
+        {
+          "name": "Remover plano",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/planos/{{planoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "planos",
+                "{{planoId}}"
+              ]
+            },
+            "description": "curl -X DELETE {{baseUrl}}/api/planos/{{planoId}}"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Endereços",
+      "item": [
+        {
+          "name": "Criar endereço",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigoPostal\": \"01001000\",\n  \"logradouro\": \"Praça da Sé\",\n  \"bairro\": \"Sé\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/enderecos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "enderecos"
+              ]
+            },
+            "description": "curl -X POST {{baseUrl}}/api/enderecos -H 'Content-Type: application/json' -d '{\"codigoPostal\":\"01001000\",\"logradouro\":\"Praça da Sé\",\"bairro\":\"Sé\"}'"
+          },
+          "response": []
+        },
+        {
+          "name": "Listar endereços",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/enderecos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "enderecos"
+              ]
+            },
+            "description": "curl -X GET {{baseUrl}}/api/enderecos"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar endereço",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/enderecos/{{enderecoCodigo}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "enderecos",
+                "{{enderecoCodigo}}"
+              ]
+            },
+            "description": "curl -X GET {{baseUrl}}/api/enderecos/{{enderecoCodigo}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar endereço",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigoPostal\": \"01001000\",\n  \"logradouro\": \"Praça da Sé Atualizada\",\n  \"bairro\": \"Sé\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/enderecos/{{enderecoCodigo}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "enderecos",
+                "{{enderecoCodigo}}"
+              ]
+            },
+            "description": "curl -X PUT {{baseUrl}}/api/enderecos/{{enderecoCodigo}} -H 'Content-Type: application/json' -d '{\"codigoPostal\":\"01001000\",\"logradouro\":\"Praça da Sé Atualizada\",\"bairro\":\"Sé\"}'"
+          },
+          "response": []
+        },
+        {
+          "name": "Remover endereço",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/enderecos/{{enderecoCodigo}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "enderecos",
+                "{{enderecoCodigo}}"
+              ]
+            },
+            "description": "curl -X DELETE {{baseUrl}}/api/enderecos/{{enderecoCodigo}}"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Assinaturas",
+      "item": [
+        {
+          "name": "Criar assinatura",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"planoId\": {{planoId}},\n  \"statusAtiva\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/assinaturas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "assinaturas"
+              ]
+            },
+            "description": "curl -X POST {{baseUrl}}/api/assinaturas -H 'Content-Type: application/json' -d '{\"planoId\":{{planoId}},\"statusAtiva\":true}'"
+          },
+          "response": []
+        },
+        {
+          "name": "Listar assinaturas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/assinaturas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "assinaturas"
+              ]
+            },
+            "description": "curl -X GET {{baseUrl}}/api/assinaturas"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar assinatura",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/assinaturas/{{assinaturaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "assinaturas",
+                "{{assinaturaId}}"
+              ]
+            },
+            "description": "curl -X GET {{baseUrl}}/api/assinaturas/{{assinaturaId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar assinatura",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"planoId\": {{planoId}},\n  \"statusAtiva\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/assinaturas/{{assinaturaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "assinaturas",
+                "{{assinaturaId}}"
+              ]
+            },
+            "description": "curl -X PUT {{baseUrl}}/api/assinaturas/{{assinaturaId}} -H 'Content-Type: application/json' -d '{\"planoId\":{{planoId}},\"statusAtiva\":false}'"
+          },
+          "response": []
+        },
+        {
+          "name": "Remover assinatura",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/assinaturas/{{assinaturaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "assinaturas",
+                "{{assinaturaId}}"
+              ]
+            },
+            "description": "curl -X DELETE {{baseUrl}}/api/assinaturas/{{assinaturaId}}"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Cartões",
+      "item": [
+        {
+          "name": "Criar cartão para assinatura",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assinaturaId\": {{assinaturaId}},\n  \"nomeTitular\": \"João Silva\",\n  \"ultimosQuatroDigitos\": \"1234\",\n  \"tokenGateway\": \"tok_abc123\",\n  \"validade\": \"2028-12-31\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/assinaturas/{{assinaturaId}}/cartoes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "assinaturas",
+                "{{assinaturaId}}",
+                "cartoes"
+              ]
+            },
+            "description": "curl -X POST {{baseUrl}}/api/assinaturas/{{assinaturaId}}/cartoes -H 'Content-Type: application/json' -d '{\"assinaturaId\":{{assinaturaId}},\"nomeTitular\":\"João Silva\",\"ultimosQuatroDigitos\":\"1234\",\"tokenGateway\":\"tok_abc123\",\"validade\":\"2028-12-31\"}'"
+          },
+          "response": []
+        },
+        {
+          "name": "Listar cartões da assinatura",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/assinaturas/{{assinaturaId}}/cartoes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "assinaturas",
+                "{{assinaturaId}}",
+                "cartoes"
+              ]
+            },
+            "description": "curl -X GET {{baseUrl}}/api/assinaturas/{{assinaturaId}}/cartoes"
+          },
+          "response": []
+        },
+        {
+          "name": "Listar cartões",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/cartoes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cartoes"
+              ]
+            },
+            "description": "curl -X GET {{baseUrl}}/api/cartoes"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar cartão",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/cartoes/{{cartaoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cartoes",
+                "{{cartaoId}}"
+              ]
+            },
+            "description": "curl -X GET {{baseUrl}}/api/cartoes/{{cartaoId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar cartão",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assinaturaId\": {{assinaturaId}},\n  \"nomeTitular\": \"João S. Silva\",\n  \"ultimosQuatroDigitos\": \"9999\",\n  \"tokenGateway\": \"tok_xyz789\",\n  \"validade\": \"2029-06-30\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/cartoes/{{cartaoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cartoes",
+                "{{cartaoId}}"
+              ]
+            },
+            "description": "curl -X PUT {{baseUrl}}/api/cartoes/{{cartaoId}} -H 'Content-Type: application/json' -d '{\"assinaturaId\":{{assinaturaId}},\"nomeTitular\":\"João S. Silva\",\"ultimosQuatroDigitos\":\"9999\",\"tokenGateway\":\"tok_xyz789\",\"validade\":\"2029-06-30\"}'"
+          },
+          "response": []
+        },
+        {
+          "name": "Remover cartão",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/cartoes/{{cartaoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cartoes",
+                "{{cartaoId}}"
+              ]
+            },
+            "description": "curl -X DELETE {{baseUrl}}/api/cartoes/{{cartaoId}}"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Usuários",
+      "item": [
+        {
+          "name": "Criar usuário",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"João Silva\",\n  \"email\": \"joao.silva@example.com\",\n  \"senhaHash\": \"$2a$10$hashhashhashhashhashhashhashhashhashhashhashhashh\",\n  \"titular\": true,\n  \"dataNascimento\": \"1990-05-15\",\n  \"endereco\": {\n    \"codigoPostal\": \"{{enderecoCodigo}}\",\n    \"logradouro\": \"Praça da Sé\",\n    \"bairro\": \"Sé\"\n  },\n  \"planoId\": {{planoId}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios"
+              ]
+            },
+            "description": "curl -X POST {{baseUrl}}/api/usuarios -H 'Content-Type: application/json' -d '{\"nome\":\"João Silva\",\"email\":\"joao.silva@example.com\",\"senhaHash\":\"$2a$10$hashhashhashhashhashhashhashhashhashhashhashhashh\",\"titular\":true,\"dataNascimento\":\"1990-05-15\",\"endereco\":{\"codigoPostal\":\"{{enderecoCodigo}}\",\"logradouro\":\"Praça da Sé\",\"bairro\":\"Sé\"},\"planoId\":{{planoId}}}'"
+          },
+          "response": []
+        },
+        {
+          "name": "Criar usuário com assinatura existente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Maria Santos\",\n  \"email\": \"maria.santos@example.com\",\n  \"senhaHash\": \"$2a$10$hashhashhashhashhashhashhashhashhashhashhashhashh\",\n  \"titular\": false,\n  \"dataNascimento\": \"1985-08-22\",\n  \"endereco\": {\n    \"codigoPostal\": \"01311000\",\n    \"logradouro\": \"Av. Paulista\",\n    \"bairro\": \"Bela Vista\"\n  },\n  \"assinaturaId\": {{assinaturaId}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios"
+              ]
+            },
+            "description": "curl -X POST {{baseUrl}}/api/usuarios -H 'Content-Type: application/json' -d '{\"nome\":\"Maria Santos\",\"email\":\"maria.santos@example.com\",\"senhaHash\":\"$2a$10$hashhashhashhashhashhashhashhashhashhashhashhashh\",\"titular\":false,\"dataNascimento\":\"1985-08-22\",\"endereco\":{\"codigoPostal\":\"01311000\",\"logradouro\":\"Av. Paulista\",\"bairro\":\"Bela Vista\"},\"assinaturaId\":{{assinaturaId}}}'"
+          },
+          "response": []
+        },
+        {
+          "name": "Listar usuários",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios"
+              ]
+            },
+            "description": "curl -X GET {{baseUrl}}/api/usuarios"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar usuário",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{usuarioId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{usuarioId}}"
+              ]
+            },
+            "description": "curl -X GET {{baseUrl}}/api/usuarios/{{usuarioId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar usuário",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"João Silva Atualizado\",\n  \"email\": \"joao.silva@example.com\",\n  \"senhaHash\": \"$2a$10$hashhashhashhashhashhashhashhashhashhashhashhashh\",\n  \"titular\": true,\n  \"dataNascimento\": \"1990-05-15\",\n  \"endereco\": {\n    \"codigoPostal\": \"{{enderecoCodigo}}\",\n    \"logradouro\": \"Praça da Sé\",\n    \"bairro\": \"Sé\"\n  },\n  \"planoId\": {{planoId}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{usuarioId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{usuarioId}}"
+              ]
+            },
+            "description": "curl -X PUT {{baseUrl}}/api/usuarios/{{usuarioId}} -H 'Content-Type: application/json' -d '{\"nome\":\"João Silva Atualizado\",\"email\":\"joao.silva@example.com\",\"senhaHash\":\"$2a$10$hashhashhashhashhashhashhashhashhashhashhashhashh\",\"titular\":true,\"dataNascimento\":\"1990-05-15\",\"endereco\":{\"codigoPostal\":\"{{enderecoCodigo}}\",\"logradouro\":\"Praça da Sé\",\"bairro\":\"Sé\"},\"planoId\":{{planoId}}}'"
+          },
+          "response": []
+        },
+        {
+          "name": "Remover usuário",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{usuarioId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{usuarioId}}"
+              ]
+            },
+            "description": "curl -X DELETE {{baseUrl}}/api/usuarios/{{usuarioId}}"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Telefones",
+      "item": [
+        {
+          "name": "Criar telefone para usuário",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usuarioId\": {{usuarioId}},\n  \"numero\": \"(11) 98765-4321\",\n  \"tipo\": \"CELULAR\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{usuarioId}}/telefones",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{usuarioId}}",
+                "telefones"
+              ]
+            },
+            "description": "curl -X POST {{baseUrl}}/api/usuarios/{{usuarioId}}/telefones -H 'Content-Type: application/json' -d '{\"usuarioId\":{{usuarioId}},\"numero\":\"(11) 98765-4321\",\"tipo\":\"CELULAR\"}'"
+          },
+          "response": []
+        },
+        {
+          "name": "Listar telefones do usuário",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuarios/{{usuarioId}}/telefones",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuarios",
+                "{{usuarioId}}",
+                "telefones"
+              ]
+            },
+            "description": "curl -X GET {{baseUrl}}/api/usuarios/{{usuarioId}}/telefones"
+          },
+          "response": []
+        },
+        {
+          "name": "Listar telefones",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/telefones",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "telefones"
+              ]
+            },
+            "description": "curl -X GET {{baseUrl}}/api/telefones"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar telefone",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/telefones/{{telefoneId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "telefones",
+                "{{telefoneId}}"
+              ]
+            },
+            "description": "curl -X GET {{baseUrl}}/api/telefones/{{telefoneId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar telefone",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usuarioId\": {{usuarioId}},\n  \"numero\": \"(11) 91234-5678\",\n  \"tipo\": \"FIXO\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/telefones/{{telefoneId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "telefones",
+                "{{telefoneId}}"
+              ]
+            },
+            "description": "curl -X PUT {{baseUrl}}/api/telefones/{{telefoneId}} -H 'Content-Type: application/json' -d '{\"usuarioId\":{{usuarioId}},\"numero\":\"(11) 91234-5678\",\"tipo\":\"FIXO\"}'"
+          },
+          "response": []
+        },
+        {
+          "name": "Remover telefone",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/telefones/{{telefoneId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "telefones",
+                "{{telefoneId}}"
+              ]
+            },
+            "description": "curl -X DELETE {{baseUrl}}/api/telefones/{{telefoneId}}"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

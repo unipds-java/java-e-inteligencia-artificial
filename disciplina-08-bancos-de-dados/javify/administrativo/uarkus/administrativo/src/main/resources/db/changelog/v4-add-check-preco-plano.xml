@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <!--
+        Adiciona constraint de validacao de preco negativo - esquecida no v1.
+
+        Aqui a abstracao do Liquibase termina: addCheckConstraint e change type
+        do Liquibase Pro, entao no open source o jeito e <sql> dentro do
+        changeset XML, com o <rollback> escrito a mao.
+    -->
+    <changeSet id="4-check-preco-plano" author="javify" labels="schema">
+        <sql>
+            ALTER TABLE plano
+                ADD CONSTRAINT chk_plano_preco_nao_negativo
+                    CHECK (preco >= 0);
+        </sql>
+        <rollback>
+            ALTER TABLE plano DROP CONSTRAINT chk_plano_preco_nao_negativo;
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

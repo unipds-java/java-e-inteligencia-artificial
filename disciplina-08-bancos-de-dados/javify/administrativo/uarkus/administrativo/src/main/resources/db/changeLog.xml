@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <!--
+        Cada arquivo corresponde a uma migration do Flyway (V1..V5), mas o formato
+        de cada um segue o que a mudanca pede:
+
+          v1, v2  DDL declarativo em XML, com rollback automatico
+          v3      seed pequeno via loadData a partir de um CSV
+          v4      CHECK constraint em <sql> (addCheckConstraint e Liquibase Pro)
+          v5      seed grande via <sqlFile>, mantendo o SQL como SQL
+    -->
+
+    <include file="db/changelog/v1-schema-inicial.xml"/>
+    <include file="db/changelog/v2-add-descricao-plano.xml"/>
+    <include file="db/changelog/v3-seed-planos.xml"/>
+    <include file="db/changelog/v4-add-check-preco-plano.xml"/>
+    <include file="db/changelog/v5-insere-dados-restantes.xml"/>
+
+</databaseChangeLog>

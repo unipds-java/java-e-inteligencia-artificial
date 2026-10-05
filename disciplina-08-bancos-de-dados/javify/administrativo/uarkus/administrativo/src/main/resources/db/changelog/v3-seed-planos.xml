@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <!--
+        Dados iniciais dos planos do Javify.
+
+        loadData le o CSV e monta os INSERTs. A coluna id fica de fora de
+        proposito: quem preenche e a sequence do SERIAL. Os <column> aqui so
+        declaram o tipo de cada coluna do CSV - o que nao aparece e STRING.
+        loadData nao tem rollback automatico, entao ele vai explicito.
+    -->
+    <changeSet id="3-seed-planos" author="javify" labels="seed">
+        <loadData tableName="plano"
+                  file="db/changelog/v3-seed-planos.csv"
+                  relativeToChangelogFile="false"
+                  separator=","
+                  quotchar="&quot;"
+                  encoding="UTF-8">
+            <column name="nome" type="STRING"/>
+            <column name="preco" type="NUMERIC"/>
+            <column name="possui_propagandas" type="BOOLEAN"/>
+            <column name="limite_membros" type="NUMERIC"/>
+            <column name="modo_offline" type="BOOLEAN"/>
+            <column name="descricao" type="STRING"/>
+        </loadData>
+        <rollback>
+            DELETE FROM plano WHERE nome IN ('Free','Standard','Premium');
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

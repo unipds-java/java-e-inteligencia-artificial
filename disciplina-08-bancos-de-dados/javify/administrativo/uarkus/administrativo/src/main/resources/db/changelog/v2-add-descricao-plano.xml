@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <!-- Adiciona campo de descricao de marketing ao plano.
+         addColumn tem rollback automatico (dropColumn). -->
+    <changeSet id="2-descricao-plano" author="javify" labels="schema">
+        <addColumn tableName="plano">
+            <column name="descricao" type="varchar(500)"/>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

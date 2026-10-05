@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <!--
+        Schema completo do Javify.
+
+        Um changeset por tabela: e o que da granularidade ao rollback. Os tipos
+        sao declarados de forma agnostica (int + autoIncrement vira SERIAL no
+        PostgreSQL, bigint + autoIncrement vira BIGSERIAL), e createTable sabe se
+        desfazer sozinho, entao nenhum destes changesets precisa de <rollback>.
+    -->
+
+    <changeSet id="1-plano" author="javify" labels="schema">
+        <createTable tableName="plano">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="plano_pkey"/>
+            </column>
+            <column name="nome" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="preco" type="decimal(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="possui_propagandas" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="limite_membros" type="int" defaultValueNumeric="1">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modo_offline" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1-endereco" author="javify" labels="schema">
+        <createTable tableName="endereco">
+            <column name="codigo_postal" type="varchar(8)">
+                <constraints primaryKey="true" primaryKeyName="endereco_pkey"/>
+            </column>
+            <column name="logradouro" type="varchar(150)"/>
+            <column name="bairro" type="varchar(100)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1-assinatura" author="javify" labels="schema">
+        <createTable tableName="assinatura">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="assinatura_pkey"/>
+            </column>
+            <column name="plano_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status_ativa" type="boolean" defaultValueBoolean="true">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1-usuario" author="javify" labels="schema">
+        <createTable tableName="usuario">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="usuario_pkey"/>
+            </column>
+            <column name="nome" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(150)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="usuario_email_key"/>
+            </column>
+            <column name="senha_hash" type="varchar(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="titular" type="boolean" defaultValueBoolean="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_nascimento" type="date"/>
+            <column name="cep" type="varchar(8)"/>
+            <column name="assinatura_id" type="int"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1-usuario-telefone" author="javify" labels="schema">
+        <createTable tableName="usuario_telefone">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="usuario_telefone_pkey"/>
+            </column>
+            <column name="usuario_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="numero" type="varchar(20)"/>
+            <column name="tipo" type="varchar(20)"/>
+        </createTable>
+    </changeSet>
+
+    <!--
+        addCheckConstraint e change type do Liquibase Pro, entao no open source o
+        CHECK vai como <sql> e o rollback precisa ser escrito a mao.
+    -->
+    <changeSet id="1-usuario-telefone-check-tipo" author="javify" labels="schema">
+        <sql>
+            ALTER TABLE usuario_telefone
+                ADD CONSTRAINT usuario_telefone_tipo_check
+                    CHECK (tipo IN ('CELULAR','COMERCIAL','FIXO'));
+        </sql>
+        <rollback>
+            ALTER TABLE usuario_telefone DROP CONSTRAINT usuario_telefone_tipo_check;
+        </rollback>
+    </changeSet>
+
+    <changeSet id="1-cartao-credito" author="javify" labels="schema">
+        <createTable tableName="cartao_credito">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="cartao_credito_pkey"/>
+            </column>
+            <column name="assinatura_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nome_titular" type="varchar(100)"/>
+            <column name="ultimos_quatro_digitos" type="varchar(4)"/>
+            <column name="token_gateway" type="varchar(255)"/>
+            <column name="validade" type="date"/>
+        </createTable>
+    </changeSet>
+
+    <!-- FKs declaradas apos todas as tabelas - sem problema de ordem -->
+    <changeSet id="1-fks" author="javify" labels="schema">
+        <addForeignKeyConstraint constraintName="fk_assinatura_plano"
+                                 baseTableName="assinatura" baseColumnNames="plano_id"
+                                 referencedTableName="plano" referencedColumnNames="id"/>
+        <addForeignKeyConstraint constraintName="fk_usuario_endereco"
+                                 baseTableName="usuario" baseColumnNames="cep"
+                                 referencedTableName="endereco" referencedColumnNames="codigo_postal"/>
+        <addForeignKeyConstraint constraintName="fk_usuario_assinatura"
+                                 baseTableName="usuario" baseColumnNames="assinatura_id"
+                                 referencedTableName="assinatura" referencedColumnNames="id"/>
+        <addForeignKeyConstraint constraintName="fk_telefone_usuario"
+                                 baseTableName="usuario_telefone" baseColumnNames="usuario_id"
+                                 referencedTableName="usuario" referencedColumnNames="id"/>
+        <addForeignKeyConstraint constraintName="fk_cartao_assinatura"
+                                 baseTableName="cartao_credito" baseColumnNames="assinatura_id"
+                                 referencedTableName="assinatura" referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>
