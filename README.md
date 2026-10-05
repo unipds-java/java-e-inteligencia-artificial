@@ -96,6 +96,25 @@ Entrevistas de RH, metodologia STAR, entrevistas técnicas, live coding, negocia
 
 ---
 
+## 🎥 Lives
+
+Além dos conteúdos das disciplinas, este repositório também centraliza os códigos, exercícios, projetos e materiais utilizados nas **lives da formação**.
+
+➡️ [Acessar materiais das Lives](./lives)
+
+### Lives disponíveis
+
+- [Apache Camel](./lives/apache-camel)
+- [JPA — Exercício Filmes](./lives/jpa-filmes)
+- [RabbitMQ com Spring](./lives/rabbitmq-spring)
+- [Testes Automatizados](./lives/testes-automatizados)
+- [Refactoring — Locadora](./lives/refactoring-locadora)
+- [Refactoring — Dibujo](./lives/refactoring-dibujo)
+- [JPA — Exercício Leilão](./lives/jpa-leilao)
+- [Spring — Pedidos](./lives/spring-pedidos)
+
+---
+
 ## 🗂️ Organização do repositório
 
 Os conteúdos podem estar organizados em categorias como:
@@ -106,11 +125,52 @@ disciplina-XX/
 ├── exemplos/
 ├── desafios/
 └── projetos/
+```
+
+A estrutura pode variar de acordo com os materiais disponibilizados em cada disciplina.
+
+Algumas disciplinas possuem projetos completos, enquanto outras apresentam exemplos, desafios ou apenas materiais de referência.
+
+As lives são organizadas separadamente:
+
+```text
+lives/
+├── README.md
+├── apache-camel/
+├── jpa-filmes/
+├── rabbitmq-spring/
+├── testes-automatizados/
+├── refactoring-locadora/
+├── refactoring-dibujo/
+├── jpa-leilao/
+└── spring-pedidos/
+```
 
 ---
 
-## 🎥 Lives
+## 🚀 Como utilizar
 
-Além dos conteúdos das disciplinas, este repositório centraliza os materiais utilizados nas lives da formação.
+1. Localize no AVA a disciplina que você está cursando.
+2. Acesse a pasta correspondente neste repositório.
+3. Consulte o `README.md` da disciplina.
+4. Utilize os códigos, exemplos, desafios e projetos como apoio às aulas.
+5. Consulte os READMEs específicos dos projetos quando disponíveis.
+6. Utilize a seção de **Lives** para acessar conteúdos complementares da formação.
 
-➡️ [Acessar materiais das Lives](./lives)
+> Os materiais deste repositório são complementares às aulas e aos conteúdos disponibilizados no AVA.
+
+---
+
+## ⚠️ Importante
+
+Os conteúdos podem receber atualizações ao longo da formação.
+
+Por isso, recomendamos utilizar sempre a versão disponível na branch `main`.
+
+---
+
+## 🏫 UNIPDS
+
+**Pós-Graduação em Java + Inteligência Artificial**
+
+Formação prática e aplicada para profissionais de tecnologia.
