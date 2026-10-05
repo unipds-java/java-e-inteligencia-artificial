@@ -1,4 +1,4 @@
-# UniPDI
+# UniPDS
 
 **UniPDI** é uma aplicação exemplo, desenvolvida para que os estudantes possam cadastrar e gerenciar seus **Planos de Desenvolvimento Individual (PDI)**.  
 Este projeto foi criado com objetivo educacional, para auxiliar no aprendizado de **Docker**, **Kubernetes** e **Cloud Computing**.
