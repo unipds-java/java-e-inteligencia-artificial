@@ -1,0 +1,8 @@
+[submodule "lives/sdd-na-pratica/demo/cfp-manager"]
+	path = lives/sdd-na-pratica/demo/cfp-manager
+	url = https://github.com/dearrudam/cfp-manager.git
+	branch = live-2026-11-23
+[submodule "lives/sdd-na-pratica/demo/cfp-manager-proposal-implemented"]
+	path = lives/sdd-na-pratica/demo/cfp-manager-proposal-implemented
+	url = https://github.com/dearrudam/cfp-manager.git
+	branch = live-2026-11-23-solution

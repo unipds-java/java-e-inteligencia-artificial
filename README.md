@@ -112,6 +112,7 @@ Além dos conteúdos das disciplinas, este repositório também centraliza os c�
 - [Refactoring — Dibujo](./lives/refactoring-dibujo)
 - [JPA — Exercício Leilão](./lives/jpa-leilao)
 - [Spring — Pedidos](./lives/spring-pedidos)
+- [SDD na Prática](./lives/sdd-na-pratica)
 
 ---
 

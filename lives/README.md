@@ -12,6 +12,7 @@ Este diretório reúne códigos, exercícios, projetos e materiais complementare
 - [Refactoring — Dibujo](./refactoring-dibujo)
 - [JPA — Exercício Leilão](./jpa-leilao)
 - [Spring — Pedidos](./spring-pedidos)
+- [SDD na Prática](./sdd-na-pratica)
 
 ## Sobre os materiais
 
